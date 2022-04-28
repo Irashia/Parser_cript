@@ -31,7 +31,7 @@ class MyWidget(QMainWindow):
         self.Spisok2.setEditable(True)
 
         self.value_1.setText('0')#Колво монет
-        self.value_2.setText('0')#Колво монет
+        #self.value_2.setText('0')#Колво монет
 
         self.price_1.setText('0')
         self.price_2.setText('0')
@@ -50,25 +50,27 @@ class MyWidget(QMainWindow):
             return
 
         value_1 = self.value_1.text()
-        value_2 = self.value_2.text()
+        #value_2 = self.value_2.text()
         try:
-            value_1, value_2 = int(value_1), int(value_2)
+            #value_1, value_2 = int(value_1), int(value_2)
+            value_1 = int(value_1)
 
         except:
             print('error')
             return
 
-        print('ok')
+        #print('ok')
         output_1, output_2 = self.slovar[currency_1][1], self.slovar[currency_2][1]
         self.price_1.setText(str(output_1))
         self.price_2.setText(str(output_2))
 
-        print(type(output_1))
+        #print(type(output_1))
         value_1 *= output_1
-        value_2 *= output_2
-        if output_2 == 0: return
-        print(str(value_1 / value_2))
-        self.Complete.setText(str(value_1 / value_2))
+        value_2 = output_2
+        if value_2 != 0 and value_1 != 0:
+            print(str(value_1 / value_2))
+            self.Complete.setText(str(value_1 / value_2))
+            print('es')
 
 
 def zapros(site, url):#Получение сайта
@@ -126,6 +128,3 @@ if __name__ == '__main__':
     ex = MyWidget()
     ex.show()
     sys.exit(app.exec_())
-
-
-
